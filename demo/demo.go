@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/mbarbita/go-lib/cfg-utils"
+	cfgutils "github.com/mbarbita/golib-cfgutils"
 )
 
 func main() {
