@@ -9,7 +9,7 @@ import (
 )
 
 func ReadCfgFile(fileName string) map[string]string {
-	fmt.Println("loading config file:", fileName, "...")
+	log.Println("loading config file:", fileName, "...")
 
 	cfgMap := make(map[string]string)
 
@@ -29,11 +29,11 @@ func ReadCfgFile(fileName string) map[string]string {
 
 	for scanner.Scan() {
 
-		// fmt.Printf("processing line: %v [%v]\n", index, scanner.Text())
+		// log.Printf("processing line: %v [%v]\n", index, scanner.Text())
 
 		// skip comment lines
 		if strings.HasPrefix(scanner.Text(), "#") {
-			fmt.Println("SKIPPING: comment line", index)
+			log.Println("SKIPPING: comment line", index)
 			index++
 			continue
 		}
@@ -44,23 +44,23 @@ func ReadCfgFile(fileName string) map[string]string {
 
 		// skip empty lines
 		if len(strings.TrimSpace(scanner.Text())) == 0 {
-			fmt.Println("SKIPPING: empty line", index)
+			log.Println("SKIPPING: empty line", index)
 			index++
 			continue
 		}
 
 		// check for multiple =
 		if eqc > 1 {
-			// fmt.Println("WARNING:", eqc, "\"=\" at line", index)
-			fmt.Printf("++ WARNING: %v \"=\" at line %v\n", eqc, index)
-			fmt.Printf("[%v]\n\n", scanner.Text())
+			// log.Println("WARNING:", eqc, "\"=\" at line", index)
+			log.Printf("++ WARNING: %v \"=\" at line %v\n", eqc, index)
+			log.Printf("[%v]\n\n", scanner.Text())
 			cfgWarnings++
 		}
 
 		//check for no =
 		if eqi == -1 {
-			fmt.Println("++ WARNING: no \"=\" at line", index)
-			fmt.Printf("[%v]\n\n", scanner.Text())
+			log.Println("++ WARNING: no \"=\" at line", index)
+			log.Printf("[%v]\n\n", scanner.Text())
 			cfgWarnings++
 			index++
 			continue
@@ -74,8 +74,8 @@ func ReadCfgFile(fileName string) map[string]string {
 		// check for duplicate keys
 		_, ok := cfgMap[f1]
 		if ok {
-			fmt.Println("++ WARNING: duplicated (overwriten) key at line", index)
-			fmt.Printf("[%v]\n\n", scanner.Text())
+			log.Println("++ WARNING: duplicated (overwriten) key at line", index)
+			log.Printf("[%v]\n\n", scanner.Text())
 			cfgWarnings++
 		}
 
@@ -85,7 +85,7 @@ func ReadCfgFile(fileName string) map[string]string {
 
 	} //end for
 
-	fmt.Println("loading config file", fileName, "done",
+	log.Println("loading config file", fileName, "done",
 		"\nwarnings:", cfgWarnings, "\nerrors:", cfgErrors)
 
 	fmt.Println()
