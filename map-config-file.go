@@ -8,8 +8,13 @@ import (
 	"strings"
 )
 
-func ReadCfgFile(fileName string) map[string]string {
+// ReadCfgFile reads creates a config map from external file key = value
+// silent = true to hide sensitive data from logs
+func ReadCfgFile(fileName string, silent bool) map[string]string {
 	log.Println("loading config file:", fileName, "...")
+	if silent {
+		log.Println("Hiding sensitive data:")
+	}
 
 	cfgMap := make(map[string]string)
 
@@ -53,14 +58,18 @@ func ReadCfgFile(fileName string) map[string]string {
 		if eqc > 1 {
 			// log.Println("WARNING:", eqc, "\"=\" at line", index)
 			log.Printf("++ WARNING: %v \"=\" at line %v\n", eqc, index)
-			log.Printf("[%v]\n\n", scanner.Text())
+			if !silent {
+				log.Printf("[%v]\n\n", scanner.Text())
+			}
 			cfgWarnings++
 		}
 
 		//check for no =
 		if eqi == -1 {
 			log.Println("++ WARNING: no \"=\" at line", index)
-			log.Printf("[%v]\n\n", scanner.Text())
+			if !silent {
+				log.Printf("[%v]\n\n", scanner.Text())
+			}
 			cfgWarnings++
 			index++
 			continue
@@ -75,7 +84,9 @@ func ReadCfgFile(fileName string) map[string]string {
 		_, ok := cfgMap[f1]
 		if ok {
 			log.Println("++ WARNING: duplicated (overwriten) key at line", index)
-			log.Printf("[%v]\n\n", scanner.Text())
+			if !silent {
+				log.Printf("[%v]\n\n", scanner.Text())
+			}
 			cfgWarnings++
 		}
 
