@@ -75,8 +75,8 @@ func ReadCfgFile(fileName string, silent bool) map[string]string {
 			continue
 		}
 
-		// trim spaces and convert the key to lower case,
-		f1 := strings.TrimSpace(strings.ToLower(scanner.Text()[:eqi]))
+		// trim spaces on key
+		f1 := strings.TrimSpace(scanner.Text()[:eqi])
 		// trim spaces on value
 		f2 := strings.TrimSpace(scanner.Text()[eqi+1:])
 
