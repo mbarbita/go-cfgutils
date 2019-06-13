@@ -38,7 +38,7 @@ func ReadCfgFile(fileName string, silent bool) map[string]string {
 
 		// skip comment lines
 		if strings.HasPrefix(scanner.Text(), "#") {
-			log.Println("SKIPPING: comment line", index)
+			// log.Println("SKIPPING: comment line", index)
 			index++
 			continue
 		}
@@ -49,7 +49,7 @@ func ReadCfgFile(fileName string, silent bool) map[string]string {
 
 		// skip empty lines
 		if len(strings.TrimSpace(scanner.Text())) == 0 {
-			log.Println("SKIPPING: empty line", index)
+			// log.Println("SKIPPING: empty line", index)
 			index++
 			continue
 		}
