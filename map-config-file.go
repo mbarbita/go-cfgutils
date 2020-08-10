@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-// ReadCfgFile reads creates a config map from external file key = value
+// ReadCfgFile creates a map[string]string from external config file key = value
 // silent = true to hide sensitive data from logs
 func ReadCfgFile(fileName string, silent bool) map[string]string {
 	log.Println("loading config file:", fileName, "...")
