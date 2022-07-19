@@ -2,4 +2,4 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/mbarbita/golib-cfgutils)](https://goreportcard.com/report/github.com/mbarbita/golib-cfgutils)
 
-# golib-cfgutils
+# go-cfgutils
