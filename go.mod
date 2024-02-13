@@ -1,3 +1,3 @@
 module github.com/mbarbita/go-cfgutils
 
-go 1.18
+go 1.22
